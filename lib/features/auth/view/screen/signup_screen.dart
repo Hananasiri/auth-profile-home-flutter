@@ -94,12 +94,20 @@ class SignUpScreen extends StatelessWidget {
                                       : const Icon(
                                     Icons.visibility,
                                   )),
+                              validator: (value) {
+                                if (value.toString().isEmpty){
+                                  return "Please enter password" .tr;
+                                }
+                                else {
+                                  return null;
+                                }
+                              },
                               prefixIcon: const Icon(
                                 Icons.lock,
                               ),
                               label: 'Password'.tr,
                             ),
-                            const SizedBox(height: 30),
+                            const SizedBox(height: 10),
                             TextFieldWidget(
                               label: 'Birth Day'.tr,
                               controller: authController.dateController,
