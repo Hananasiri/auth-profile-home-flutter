@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'package:auth_profile_home_flutter/features/auth/model/auth_model.dart';
-import 'package:auth_profile_home_flutter/features/profile/view/screen/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -19,6 +17,9 @@ class AuthController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController dateController = TextEditingController();
+
+  var selectedDate = DateTime.now().obs;
+  bool isDate = false;
 
   final Map<String, String> headers = {
     'Access-Control-Allow-Origin': '*',
@@ -39,17 +40,26 @@ class AuthController extends GetxController {
     phoneController.clear();
     dateController.clear();
   }
+  signUpWithEmail(AuthModel model) async {
+    await apiService.postData(
+      url: ApiString.AuthUrl,
+      body: {
+        'email': model.email,
+        'name': model.name,
+        'phone_num': model.phoneNum,
+        'birth_date': model.birthDate,
+      },
+      headers: headers,
+    );
+  }
 
-  var selectedDate = DateTime.now().obs;
-  bool isDate = false;
-  bool isLocation = false;
 
   chooseDate() async {
     DateTime? pickedDate = await showDatePicker(
         context: Get.context!,
         initialDate: selectedDate.value,
-        firstDate: DateTime(2000),
-        lastDate: DateTime(2100),
+        firstDate: DateTime(1930),
+        lastDate: DateTime(2024),
         builder: (context, child) {
           return Theme(
             data: Theme.of(context).copyWith(
@@ -82,18 +92,5 @@ class AuthController extends GetxController {
       isDate = true;
       update();
     }
-  }
-
-  signUpWithEmail(AuthModel model) async {
-    await apiService.postData(
-      url: ApiString.AuthbaseUrl,
-      body: {
-        'email': model.email,
-        'name': model.name,
-        'phone_num': model.phoneNum,
-        'birth_date': model.birthDate,
-      },
-      headers: headers,
-    );
   }
   }

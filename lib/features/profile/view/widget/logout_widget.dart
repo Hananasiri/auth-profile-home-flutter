@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../common/dialog_widget.dart';
+import '../../../../core/routes/route.dart';
 import '../../logic/controller/profile_controller.dart';
 
 class LogOutWidget extends StatelessWidget {
@@ -15,7 +16,8 @@ class LogOutWidget extends StatelessWidget {
       content: "AreYouSureToLogOut".tr,
       textButton: 'log out'.tr,
       onPressed: () {
-       // profileController.signOut();
+        Get.offNamed(Routes.signScreen);
+        // profileController.signOut();
       },
       child: Row(
         children: [

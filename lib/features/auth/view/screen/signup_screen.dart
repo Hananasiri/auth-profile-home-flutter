@@ -115,7 +115,7 @@ class SignUpScreen extends StatelessWidget {
                                         height: 25,
                                         width: 25,
                                         child:
-                                            Icon(Icons.calendar_month_outlined),
+                                            Icon(Icons.calendar_month),
                                       )
                                     // color: labalColor, size: 20)
                                     : SizedBox(

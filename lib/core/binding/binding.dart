@@ -9,5 +9,7 @@ class Binding implements Bindings {
     Get.lazyPut(() => InitialController());
     Get.put(AuthController(), permanent: true);
     Get.lazyPut(() => ProfileController());
+    Get.find<ProfileController>();
+   // Get.put(ProfileController());
   }
 }

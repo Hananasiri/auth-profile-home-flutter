@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../common/header_widget.dart';
 import '../../../../core/routes/route.dart';
+import '../../../initial/view/widget/darkmode_widget.dart';
 import '../../../initial/view/widget/localization_widget.dart';
 import '../../logic/controller/profile_controller.dart';
 import '../widget/logout_widget.dart';
@@ -15,6 +16,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<ProfileController>(builder: (profileController) {
       return Scaffold(
+
         body: SingleChildScrollView(
           child: Column(children: [
             HeaderWidget(

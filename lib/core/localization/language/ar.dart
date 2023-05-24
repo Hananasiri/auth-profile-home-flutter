@@ -8,6 +8,7 @@ const Map<String, String> ar = {
   'Full Name' : 'الاسم كاملاً',
   'Password' : 'الرقم السري',
   'Birth Day' : 'تاريخ الميلاد',
+  'PhoneNumber' : 'رقم الجوال',
 
   "createAccount": "انشاء حساب",
   "alreadyAccount": "لديك حساب ؟ ",

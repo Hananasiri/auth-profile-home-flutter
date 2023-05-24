@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import '../../../../core/constants/app_image.dart';
+import '../../../../core/routes/route.dart';
+import '../../../../core/theme/controller/colors.dart';
 import '../../logic/controller/api_controller.dart';
 import '../widget/form_dialog.dart';
 import '../widget/list_item.dart';
-
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -14,19 +16,24 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text(
-            'Home'.tr,
-            style: TextStyle(color: Colors.blue),
-            // decoration: BoxDecoration(
-            //   color: lightColor,
-            //   shape: BoxShape.circle,
-            //   image: DecorationImage(
-            //     image: AssetImage(AppImages.profileImage),
-            //     fit: BoxFit.fill,
-            //   ),
-            // ),
-          )),
+        title: Text(
+          'Home'.tr,
+          style: TextStyle(color: Colors.blue),
+        ),
+        actions: [
+          InkWell(
+            onTap: () {
+              Get.offNamed(Routes.profileScreen);
+            },
+            child: Image(
+              image: AssetImage(AppImages.profileImage),
+            ),
+          )
+        ],
+        backgroundColor: Colors.white30,
+      ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.blue,
         onPressed: () {
           Get.dialog(FormDialog());
         },
@@ -35,7 +42,7 @@ class HomeScreen extends StatelessWidget {
       body: Center(
         child: Container(
           width: Get.width * 0.99,
-          height: Get.height ,
+          height: Get.height,
           padding: const EdgeInsets.all(8),
           child: GetBuilder<ApiController>(builder: (controller) {
             return FutureBuilder(
@@ -52,7 +59,10 @@ class HomeScreen extends StatelessWidget {
                           var date = DateFormat('yyyy-MM-dd hh:mm:ss')
                               .parse(data!.date);
                           return ListItem(
-                            data: data, controller: controller, date: date,);
+                            data: data,
+                            controller: controller,
+                            date: date,
+                          );
                         },
                       );
                     } else {

@@ -8,6 +8,7 @@ const Map<String, String> en = {
   'Full Name' : 'Full Name',
   'Password' : 'Password',
   'Birth Day' : 'Birth Day',
+  'PhoneNumber' : 'PhoneNumber',
   "alreadyAccount": "Already have an account? ",
   "signUpTitle": "Get On Board!",
   "signUpSubTitle": "Create tour profile to start your journey with us",

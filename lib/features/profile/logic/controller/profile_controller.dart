@@ -4,39 +4,63 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-
+import '../../../../core/constants/api_string.dart';
+import '../../model/profile_model.dart';
+import '../service/profile_repo.dart';
 
 class ProfileController extends GetxController {
-  //final ProfileService _profileService = ProfileService();
+  final apiService = ProfileService();
   GetStorage authStorage = GetStorage();
-
   String? profilePhoto = '';
   File? pickedFileApp;
   Uint8List? pickedFileWeb;
   bool isLoading = false;
 
-  //Password icon
-  bool isVisibility = false;
-
-  //Personal Info
+  //for controllers
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
+  TextEditingController dateController = TextEditingController();
 
+  var selectedDate = DateTime
+      .now()
+      .obs;
+  bool isDate = false;
 
-  ///////////////////onInit///////////////////////////
-  @override
-  void onInit() async {
-   // await getUserInfo();
-    super.onInit();
-  }
+  final Map<String, String> headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Content-type': 'application/json',
+    'Accept': '*/*',
+  };
 
-  //fun for Password icon
-  void visibility() {
-    isVisibility = !isVisibility;
+  refreshData() {
     update();
   }
 
+  @override
+  void onInit() {
+    super.onInit();
+  }
+
+  clearController() {
+    nameController.clear();
+    emailController.clear();
+    phoneController.clear();
+    dateController.clear();
+  }
+
+  updateData(ProfileModel model) async {
+    await apiService.updateData(
+      url: ApiString.AuthUrl,
+      id: "${model.id}",
+      body: {
+        'email': model.email,
+        'name': model.name,
+        'phone_num': model.phoneNum,
+      },
+      headers: headers,
+    );
+  }
   pickImage() async {
     final result = await FilePicker.platform.pickFiles(type: FileType.image);
     if (result != null) {
@@ -52,59 +76,4 @@ class ProfileController extends GetxController {
       Get.snackbar('', "You don't pick a image");
     }
   }
-
-  // getUserInfo() {
-  //  var user = _profileService.getUserInfo(authStorage.read(AppKeys.authKey) ?? '');
-  //   nameController.text = user?.displayName ?? 'Hello user';
-  //   emailController.text = user?.email ?? 'example@gmail.com';
-  //   phoneController.text = user?.phoneNumber ?? "05000000000";
-  //   profilePhoto = user?.photoURL;
-  // }
-
-  // updateUserName({required String userName}) async {
-  //   // await _profileService.updateUserName(
-  //   //   uid: authStorage.read(AppKeys.authKey),
-  //   //   userName: userName,
-  //   //   onError: (e) {
-  //   //     Get.snackbar('something went wrong', e.toString());
-  //   //   },
-  //   //   onDone: () {
-  //   //     Get.offNamed(Routes.profileScreen);
-  //   //   },
-  //   // );
-  // }
-  // updateUserPhoto() async {
-  //   // isLoading = true;
-  //   // await _profileService.updateUserPhoto(
-  //   //     uid: authStorage.read(AppKeys.authKey),
-  //   //     pickedFile: GetPlatform.isWeb ? pickedFileWeb : pickedFileApp,
-  //   //     onError: (e) {
-  //   //       Get.snackbar('something went wrong', e.toString());
-  //   //       isLoading = false;
-  //   //     },
-  //   //     onDone: () {
-  //   //       getUserInfo();
-  //   //       isLoading = false;
-  //   //       update();
-  //   //       Get.snackbar('Photo is updated', "");
-  //   //
-  //   //     }
-  //   // );
-  // }
-
-  // signOut() async {
-  //   // await _profileService.signOut(
-  //   //   onError: (String e) {
-  //   //     Get.snackbar(
-  //   //       'something went wrong',
-  //   //       e,
-  //   //     );
-  //   //   },
-  //   //   onDone: () {
-  //   //     authStorage.remove(AppKeys.authKey);
-  //   //     authStorage.remove(AppKeys.roleKey);
-  //   //     Get.offAllNamed(Routes.signScreen);
-  //   //   },
-  //   // );
-  // }
-}
+  }

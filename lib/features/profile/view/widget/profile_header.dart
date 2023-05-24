@@ -73,12 +73,16 @@ class ProfileHeaderWidget extends StatelessWidget {
             const SizedBox(
               width: 30,
             ),
-            Text(
-              profileController.nameController.text,
-              style: theme.headlineLarge,
+            Text("Hello user",
+             // profileController.nameController.text,
+             style: theme.headlineLarge,
             ),
-            Text(
-              profileController.emailController.text,
+            Text("example@gmail.com",
+             // profileController.emailController.text,
+              style: theme.headlineSmall,
+            ),
+            Text("505678665",
+              // profileController.phoneController.text,
               style: theme.headlineSmall,
             ),
           ],
