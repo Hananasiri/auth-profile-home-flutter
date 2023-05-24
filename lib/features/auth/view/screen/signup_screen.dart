@@ -1,10 +1,12 @@
 import 'package:auth_profile_home_flutter/core/constants/validation.dart';
 import 'package:auth_profile_home_flutter/features/auth/logic/controller/auth_controller.dart';
+import 'package:auth_profile_home_flutter/features/auth/model/auth_model.dart';
 import 'package:auth_profile_home_flutter/features/auth/view/widget/TextFieldWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_utils/get_utils.dart';
+import '../../../../core/routes/route.dart';
 
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({super.key});
@@ -19,9 +21,9 @@ class SignUpScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
           title: Text(
-            'SignUp'.tr,
-            style: TextStyle(color: Colors.blue),
-          )),
+        'SignUp'.tr,
+        style: TextStyle(color: Colors.blue),
+      )),
       body: SingleChildScrollView(
         child: Form(
             key: formKey,
@@ -35,20 +37,18 @@ class SignUpScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       const SizedBox(height: 30),
-                      Text(
-                        'CreateAccount'.tr,
-                       style: TextStyle(color: Colors.blue , fontSize: 22)
-                      ),
+                      Text('CreateAccount'.tr,
+                          style: TextStyle(color: Colors.blue, fontSize: 22)),
                       const SizedBox(height: 10),
                       TextFieldWidget(
-                       controller: authController.emailController,
+                        controller: authController.emailController,
                         obscureText: false,
                         validator: (value) {
-                          if (value.toString().isEmpty){
-                            return "Please enter email" .tr;
-                          }
-                          else if (!RegExp(Validation.validationEmail).hasMatch(value)) {
-                            return  "Please enter a correct email address".tr;
+                          if (value.toString().isEmpty) {
+                            return "Please enter email".tr;
+                          } else if (!RegExp(Validation.validationEmail)
+                              .hasMatch(value)) {
+                            return "Please enter a correct email address".tr;
                           } else {
                             return null;
                           }
@@ -79,33 +79,20 @@ class SignUpScreen extends StatelessWidget {
                         return Column(
                           children: [
                             TextFieldWidget(
-                              controller: authController.passwordController,
+                              controller: authController.phoneController,
                               maxLine: 1,
-                              obscureText:
-                              authController.isVisibility ? false : true,
-                              suffixIcon: IconButton(
-                                  onPressed: () {
-                                    authController.visibility();
-                                  },
-                                  icon: authController.isVisibility
-                                      ? const Icon(
-                                    Icons.visibility_off,
-                                  )
-                                      : const Icon(
-                                    Icons.visibility,
-                                  )),
+                              obscureText: false,
                               validator: (value) {
-                                if (value.toString().isEmpty){
-                                  return "Please enter password" .tr;
-                                }
-                                else {
+                                if (value.toString().isEmpty) {
+                                  return "Please enter your phone number".tr;
+                                } else {
                                   return null;
                                 }
                               },
                               prefixIcon: const Icon(
-                                Icons.lock,
+                                Icons.phone,
                               ),
-                              label: 'Password'.tr,
+                              label: 'PhoneNumber'.tr,
                             ),
                             const SizedBox(height: 10),
                             TextFieldWidget(
@@ -119,43 +106,46 @@ class SignUpScreen extends StatelessWidget {
                                   return null;
                                 }
                               },
-
                               suffixIcon: IconButton(
                                 onPressed: () {
                                   authController.chooseDate();
                                 },
                                 icon: authController.isDate
                                     ? SizedBox(
-                                    height: 25,
-                                    width: 25,
-                                    child: Icon(
-                                    Icons.calendar_month_outlined
-                                    ),
-                                )
-                                // color: labalColor, size: 20)
+                                        height: 25,
+                                        width: 25,
+                                        child:
+                                            Icon(Icons.calendar_month_outlined),
+                                      )
+                                    // color: labalColor, size: 20)
                                     : SizedBox(
-                                    height: 25,
-                                    width: 25,
-                                    child: Icon(
-                                      Icons.calendar_month_outlined
-                                    ),
-                                ),
+                                        height: 25,
+                                        width: 25,
+                                        child:
+                                            Icon(Icons.calendar_month_outlined),
+                                      ),
                                 iconSize: 18,
                               ),
                             ),
-                           const SizedBox(height: 10),
+                            const SizedBox(height: 10),
                           ],
                         );
                       }),
                       ElevatedButton(
                         onPressed: () async {
                           if (formKey.currentState!.validate()) {
-                            //await authController.signUpWithEmail(
-                                authController.emailController.text;
-                                authController.passwordController.text;
-                                authController.nameController.text ;
-                                authController.dateController.text;
-                          //)
+                            Get.offNamed(Routes.homeScreen);
+                            //add func
+                            var data = AuthModel(
+                              email: authController.emailController.text,
+                              name: authController.nameController.text,
+                              phoneNum: authController.phoneController.hashCode,
+                              birthDate: authController.dateController.hashCode,
+                              id: 'id',
+                            );
+                            await authController.signUpWithEmail(data);
+                            authController.refreshData();
+                            authController.clearController();
                           }
                         },
                         child: Text('SignUp'.tr),
