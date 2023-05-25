@@ -4,11 +4,11 @@ const Map<String, String> en = {
 //  sign up
   'SignUp': 'SignUp',
   'CreateAccount': 'CreateAccount',
-  'E-mail' : 'E-mail',
-  'Full Name' : 'Full Name',
-  'Password' : 'Password',
-  'Birth Day' : 'Birth Day',
-  'PhoneNumber' : 'PhoneNumber',
+  'E-mail': 'E-mail',
+  'Full Name': 'Full Name',
+  'Password': 'Password',
+  'Birth Day': 'Birth Day',
+  'PhoneNumber': 'PhoneNumber',
   "alreadyAccount": "Already have an account? ",
   "signUpTitle": "Get On Board!",
   "signUpSubTitle": "Create tour profile to start your journey with us",
@@ -40,10 +40,7 @@ const Map<String, String> en = {
   "joined": "Joined ",
 
   // splach screen
-  'SignUp Screen' : 'SignUp Screen',
+  'SignUp Screen': 'SignUp Screen',
   'Profile Screen': 'Profile Screen',
-  'Home Screen' : 'Home Screen',
-
-
-
+  'Home Screen': 'Home Screen',
 };

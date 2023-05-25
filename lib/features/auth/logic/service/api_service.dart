@@ -34,4 +34,23 @@ class ApiService {
       throw Exception(e);
     }
   }
+
+  // Update
+  updateData({
+    required String url,
+    required String id,
+    required Map<String, dynamic> body,
+    required Map<String, String> headers,
+  }) async {
+    try {
+      final response = await _client.put(
+        Uri.parse("$url/$id"),
+        headers: headers,
+        body: jsonEncode(body),
+      );
+      return jsonDecode(response.body);
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 }

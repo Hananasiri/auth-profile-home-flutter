@@ -65,6 +65,11 @@ class ProfileHeaderWidget extends StatelessWidget {
               authController.phoneController.text,
               style: theme.headlineSmall,
             ),
+            Text(
+              //"04/04/1993",
+              authController.dateController.text,
+              style: theme.headlineSmall,
+            ),
           ],
         ),
       );

@@ -17,11 +17,6 @@ class PersonalInformationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    // Controller.nameController.text = authModel!.name;
-    // Controller.emailController.text = authModel!.email;
-    // Controller.phoneController.text = authModel!.phoneNum as String;
-
-
     final theme = Theme.of(context).textTheme;
     return Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -67,12 +62,11 @@ class PersonalInformationWidget extends StatelessWidget {
                    email: Controller.emailController.text,
                    name: Controller.nameController.text,
                    phoneNum: Controller.phoneController.hashCode,
-                   id: "profileModel?.id",
+                   id: authModel!.id,
                    birthDate: Controller.dateController.hashCode,
                 );
                 var respone = await Controller.updateData(data);
                 print(respone);
-                print("resppone");
                // authController.refreshData();
                 //profileController.clearController();
               },

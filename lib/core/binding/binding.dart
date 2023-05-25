@@ -10,6 +10,5 @@ class Binding implements Bindings {
     Get.put(AuthController(), permanent: true);
     Get.lazyPut(() => ProfileController());
     Get.find<ProfileController>();
-   // Get.put(ProfileController());
   }
 }
