@@ -38,7 +38,7 @@ class ListItem extends StatelessWidget {
         //mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
-           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Column(
@@ -54,7 +54,7 @@ class ListItem extends StatelessWidget {
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children:[
+                children: [
                   IconButton(
                     onPressed: () {
                       Get.dialog(EditFormDialog(

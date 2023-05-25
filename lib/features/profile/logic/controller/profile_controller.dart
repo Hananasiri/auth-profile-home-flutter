@@ -51,7 +51,7 @@ class ProfileController extends GetxController {
 
   updateData(ProfileModel model) async {
     await apiService.updateData(
-      url: ApiString.AuthUrl,
+      url: ApiString.baseUrl,
       id: "${model.id}",
       body: {
         'email': model.email,
@@ -75,5 +75,9 @@ class ProfileController extends GetxController {
     } else {
       Get.snackbar('', "You don't pick a image");
     }
+  }
+
+    signOut() {
+
   }
   }

@@ -3,12 +3,12 @@ import 'package:get/get.dart';
 import '../../../../core/localization/controller/localization_controller.dart';
 
 class LocalizationWidget extends StatelessWidget {
-  const LocalizationWidget({Key? key,})
-      : super(key: key);
+  const LocalizationWidget({
+    Key? key,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return    Column(
-
+    return Column(
       children: [
         Row(
           children: [
@@ -51,4 +51,3 @@ class LocalizationWidget extends StatelessWidget {
     );
   }
 }
-

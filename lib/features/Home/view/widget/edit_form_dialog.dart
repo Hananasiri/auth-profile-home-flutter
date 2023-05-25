@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../logic/controller/api_controller.dart';
 
-
 class EditFormDialog extends StatelessWidget {
   EditFormDialog({Key? key, required this.toDoModel}) : super(key: key);
   final HomeModel? toDoModel;
@@ -15,8 +14,9 @@ class EditFormDialog extends StatelessWidget {
     controller.descriptionController.text = toDoModel!.description;
 
     return AlertDialog(
-      title: const Text('Edit item',
-      style: TextStyle(color: Colors.blue),
+      title: const Text(
+        'Edit item',
+        style: TextStyle(color: Colors.blue),
       ),
       content: SizedBox(
         height: 200,
@@ -25,7 +25,9 @@ class EditFormDialog extends StatelessWidget {
             TextField(
               controller: controller.titleController,
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             TextField(
               controller: controller.descriptionController,
             ),
@@ -34,7 +36,10 @@ class EditFormDialog extends StatelessWidget {
       ),
       actions: <Widget>[
         TextButton(
-          child: const Text('Save', style: TextStyle(color: Colors.black),),
+          child: const Text(
+            'Save',
+            style: TextStyle(color: Colors.black),
+          ),
           onPressed: () async {
             Get.back();
             //add func

@@ -4,12 +4,14 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import '../../../../core/constants/api_string.dart';
+import '../../../../core/constants/keys.dart';
 import '../../../../core/theme/controller/colors.dart';
 import '../../../Home/logic/service/api_service.dart';
 import 'package:http/http.dart' as http;
 
 class AuthController extends GetxController {
   final apiService = ApiService();
+  bool isLoading = false;
   GetStorage authStorage = GetStorage();
 
   //for controllers
@@ -27,19 +29,22 @@ class AuthController extends GetxController {
     'Accept': '*/*',
   };
 
-  refreshData() {
-    update();
-  }
+  // refreshData() {
+  //   update();
+  // }
   @override
   void onInit() {
     super.onInit();
+    emailController.text =
+        authStorage.read(AppKeys.emailKey) ?? emailController.text;
   }
-  clearController() {
-    nameController.clear();
-    emailController.clear();
-    phoneController.clear();
-    dateController.clear();
-  }
+
+  // clearController() {
+  //   nameController.clear();
+  //   emailController.clear();
+  //   phoneController.clear();
+  //   dateController.clear();
+  //  }
   signUpWithEmail(AuthModel model) async {
     await apiService.postData(
       url: ApiString.AuthUrl,
@@ -53,6 +58,18 @@ class AuthController extends GetxController {
     );
   }
 
+  updateData(AuthModel model) async {
+    await apiService.updateData(
+      url: ApiString.AuthUrl,
+      id: "${model.id}",
+      body: {
+        'email': model.email,
+        'name': model.name,
+        'phone_num': model.phoneNum,
+      },
+      headers: headers,
+    );
+  }
 
   chooseDate() async {
     DateTime? pickedDate = await showDatePicker(
@@ -83,7 +100,6 @@ class AuthController extends GetxController {
       dateController.text =
           DateFormat.yMMMd().format(selectedDate.value).toString();
       print(dateController.text);
-
       isDate = true;
       update();
     } else {
@@ -93,4 +109,4 @@ class AuthController extends GetxController {
       update();
     }
   }
-  }
+}

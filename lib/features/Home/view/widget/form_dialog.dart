@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../logic/controller/api_controller.dart';
 
-
 class FormDialog extends StatelessWidget {
   FormDialog({Key? key}) : super(key: key);
   final controller = Get.find<ApiController>();
@@ -11,7 +10,10 @@ class FormDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Add item', style: TextStyle(color: Colors.blue),),
+      title: const Text(
+        'Add item',
+        style: TextStyle(color: Colors.blue),
+      ),
       content: SizedBox(
         height: 200,
         child: Column(
@@ -23,15 +25,17 @@ class FormDialog extends StatelessWidget {
             SizedBox(height: 20),
             TextField(
               controller: controller.descriptionController,
-              decoration:
-              const InputDecoration(hintText: 'Description'),
+              decoration: const InputDecoration(hintText: 'Description'),
             ),
           ],
         ),
       ),
       actions: <Widget>[
         TextButton(
-          child: const Text('Save', style: TextStyle(color: Colors.black),),
+          child: const Text(
+            'Save',
+            style: TextStyle(color: Colors.black),
+          ),
           onPressed: () async {
             Get.back();
             //add func
@@ -43,7 +47,6 @@ class FormDialog extends StatelessWidget {
             await controller.postData(data);
             controller.refreshData();
             controller.clearController();
-
           },
         ),
       ],

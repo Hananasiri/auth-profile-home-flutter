@@ -114,8 +114,7 @@ class SignUpScreen extends StatelessWidget {
                                     ? SizedBox(
                                         height: 25,
                                         width: 25,
-                                        child:
-                                            Icon(Icons.calendar_month),
+                                        child: Icon(Icons.calendar_month),
                                       )
                                     // color: labalColor, size: 20)
                                     : SizedBox(
@@ -144,8 +143,8 @@ class SignUpScreen extends StatelessWidget {
                               id: 'id',
                             );
                             await authController.signUpWithEmail(data);
-                            authController.refreshData();
-                            authController.clearController();
+                            //authController.refreshData();
+                            // authController.clearController();
                           }
                         },
                         child: Text('SignUp'.tr),

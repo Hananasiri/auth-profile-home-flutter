@@ -1,8 +1,8 @@
+import 'package:auth_profile_home_flutter/features/auth/logic/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../core/constants/app_image.dart';
 import '../../../../core/theme/controller/colors.dart';
-import '../../logic/controller/profile_controller.dart';
 
 class ProfileHeaderWidget extends StatelessWidget {
   const ProfileHeaderWidget({
@@ -12,12 +12,12 @@ class ProfileHeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).textTheme;
-    return GetBuilder<ProfileController>(builder: (profileController) {
+    return GetBuilder<AuthController>(builder: (authController) {
       return Align(
         alignment: Alignment.center,
         child: Column(
           children: [
-            profileController.isLoading
+            authController.isLoading
                 ? Container(
                     height: 100,
                     width: 100,
@@ -32,8 +32,8 @@ class ProfileHeaderWidget extends StatelessWidget {
                   )
                 : Stack(children: [
                     Container(
-                      height: 100,
-                      width: 100,
+                      height: 140,
+                      width: 140,
                       decoration: BoxDecoration(
                         color: lightColor,
                         shape: BoxShape.circle,
@@ -43,46 +43,26 @@ class ProfileHeaderWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Positioned(
-                        top: 70,
-                        left: 60,
-                        child: InkWell(
-                          //onTap: ()
-                          // async {
-                          //   await profileController.pickImage();
-                          //   await profileController.updateUserPhoto();
-                          // },
-                          child: Container(
-                            height: 30,
-                            width: 30,
-                            decoration: const BoxDecoration(
-                              color: blackColor,
-                              shape: BoxShape.circle,
-                            ),
-                            child: const Icon(
-                              Icons.flip_camera_ios_outlined,
-                              color: whiteColor,
-                              size: 18,
-                            ),
-                          ),
-                        ))
                   ]),
+            // const SizedBox(
+            //   height: 10,
+            // ),
             const SizedBox(
-              height: 10,
+              width: 10,
             ),
-            const SizedBox(
-              width: 30,
+            Text(
+              //"Hello user",
+              authController.nameController.text,
+              style: theme.headlineLarge,
             ),
-            Text("Hello user",
-             // profileController.nameController.text,
-             style: theme.headlineLarge,
-            ),
-            Text("example@gmail.com",
-             // profileController.emailController.text,
+            Text(
+              // "example@gmail.com",
+              authController.emailController.text,
               style: theme.headlineSmall,
             ),
-            Text("505678665",
-              // profileController.phoneController.text,
+            Text(
+              //"505678665",
+              authController.phoneController.text,
               style: theme.headlineSmall,
             ),
           ],

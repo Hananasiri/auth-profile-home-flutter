@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../../../core/constants/app_image.dart';
 import '../../../../core/routes/route.dart';
-import '../../../../core/theme/controller/colors.dart';
 import '../../logic/controller/api_controller.dart';
 import '../widget/form_dialog.dart';
 import '../widget/list_item.dart';
@@ -67,12 +66,12 @@ class HomeScreen extends StatelessWidget {
                       );
                     } else {
                       return const Center(
-                        child: Text("THERE IS NO ITEMS"),
+                        child: Text("No Items"),
                       );
                     }
                   } else {
                     return const Center(
-                      child: Text("THERE IS NO ITEMS"),
+                      child: Text("No Items"),
                     );
                   }
                 });

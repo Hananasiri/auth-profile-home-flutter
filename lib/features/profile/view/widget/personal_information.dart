@@ -1,27 +1,25 @@
 import 'package:auth_profile_home_flutter/features/auth/model/auth_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../../core/routes/route.dart';
 import '../../../auth/logic/controller/auth_controller.dart';
 import '../../../auth/view/widget/TextFieldWidget.dart';
-import '../../logic/controller/profile_controller.dart';
-import '../../model/profile_model.dart';
 
 class PersonalInformationWidget extends StatelessWidget {
-   PersonalInformationWidget({Key? key, required this.profileController, this.profileModel
+   PersonalInformationWidget({Key? key, required this.authController, this.authModel
    }): super(key: key);
 
-  final  ProfileController profileController;
-  //final authController = Get.put(AuthController());
-   final controller = Get.find<ProfileController>();
+  final  AuthController authController;
+  final Controller = Get.put(AuthController());
+  //  final controller = Get.find<ProfileController>();
 
-   final ProfileModel? profileModel;
-
+   final AuthModel? authModel;
   @override
   Widget build(BuildContext context) {
 
-    // controller.nameController.text = profileModel!.name;
-    // controller.emailController.text = profileModel!.email;
-    // controller.phoneController.text = profileModel!.phoneNum as String;
+    // Controller.nameController.text = authModel!.name;
+    // Controller.emailController.text = authModel!.email;
+    // Controller.phoneController.text = authModel!.phoneNum as String;
 
 
     final theme = Theme.of(context).textTheme;
@@ -36,7 +34,7 @@ class PersonalInformationWidget extends StatelessWidget {
           ),
           const SizedBox(height: 50),
           TextFieldWidget(
-            controller: controller.nameController,
+            controller: Controller.nameController,
             obscureText: false,
             prefixIcon: const Icon(
               Icons.person,
@@ -44,8 +42,7 @@ class PersonalInformationWidget extends StatelessWidget {
             label: 'fullName'.tr,
           ),
           TextFieldWidget(
-            enabled: false,
-            controller: controller.emailController,
+            controller: Controller.emailController,
             obscureText: false,
             prefixIcon: const Icon(
               Icons.email,
@@ -53,8 +50,7 @@ class PersonalInformationWidget extends StatelessWidget {
             label: "email".tr,
           ),
           TextFieldWidget(
-            enabled: false,
-            controller: controller.phoneController,
+            controller:  Controller.phoneController,
             obscureText: false,
             prefixIcon: const Icon(
               Icons.phone_android,
@@ -64,21 +60,21 @@ class PersonalInformationWidget extends StatelessWidget {
           const SizedBox(height: 20),
           ElevatedButton(
               onPressed: () async {
-                Get.back();
+                Get.offNamed(Routes.profileScreen);
                 //add func
-                print(controller.nameController.text);
-                print("hhhhhh");
-                 var data = ProfileModel(
-                   email: controller.emailController.text,
-                   name: controller.nameController.text,
-                   phoneNum: controller.phoneController.hashCode,
+                print(Controller.nameController.text);
+                 var data = AuthModel(
+                   email: Controller.emailController.text,
+                   name: Controller.nameController.text,
+                   phoneNum: Controller.phoneController.hashCode,
                    id: "profileModel?.id",
+                   birthDate: Controller.dateController.hashCode,
                 );
-                var respone = await profileController.updateData(data);
+                var respone = await Controller.updateData(data);
                 print(respone);
-                print("mmmmmm");
-                profileController.refreshData();
-                profileController.clearController();
+                print("resppone");
+               // authController.refreshData();
+                //profileController.clearController();
               },
               child: Text('Edit'.tr)),
         ]);
